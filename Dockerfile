@@ -1,6 +1,8 @@
 FROM tutum/tomcat:7.0
 MAINTAINER Arnaud de Mouhy <arnaud@flyingpingu.com>
 
+ENV ICESCRUM_VERSION R6_13.6
+
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
@@ -10,8 +12,8 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /tomcat/webapps
 
-RUN wget -q http://www.icescrum.org/downloads/icescrum_R6_13.5_war.zip
-RUN unzip -q icescrum_R6_13.5_war.zip
+RUN wget -q http://www.icescrum.org/downloads/icescrum_${ICESCRUM_VERSION}_war.zip
+RUN unzip -q icescrum_${ICESCRUM_VERSION}_war.zip
 
 ENV CATALINA_OPTS						\
     -Dicescrum.log.dir=/webapps/logs				\
